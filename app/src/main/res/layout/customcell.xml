@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/is_bg">
+
+    <LinearLayout
+        android:id="@+id/postHead"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/is_post_bg">
+
+        <TextView
+            android:id="@+id/owner_name_lbl"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Username"
+            android:textColor="@color/is_link"
+            android:background="@color/is_post_bg"
+            android:textSize="30sp"
+            android:maxLines="1"/>
+
+        <TextView
+            android:id="@+id/date_lbl"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/is_post_bg"
+            android:gravity="end"
+            android:maxLines="1"
+            android:text="Date"
+            android:textColor="@color/is_info"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/post_imageview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/postHead"
+        android:background="@color/is_post_bg"
+        android:src="@drawable/ic_launcher_background"
+        tools:ignore="NotSibling"
+        android:adjustViewBounds="true"/>
+
+    <TextView
+        android:id="@+id/post_text_lbl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/post_imageview"
+        android:text="Post text"
+        android:textColor="@android:color/white"
+        android:textSize="30sp"
+        android:background="@color/is_txt_bg" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/is_post_bg"
+        android:layout_below="@id/post_text_lbl"
+        android:padding="10dp">
+
+    <ImageButton
+        android:id="@+id/likeBtn"
+        android:layout_height="40dp"
+        android:layout_width="40dp"
+        android:text="Like"
+        android:layout_gravity="center_horizontal"
+        android:adjustViewBounds="true"
+        android:src="@drawable/like"
+        android:scaleType="fitXY"
+        android:background="@android:color/transparent" />
+    </LinearLayout>
+
+</RelativeLayout>

@@ -7,4 +7,10 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="is_bg">#181818</color>
+    <color name="is_link">#fd7e14</color>
+    <color name="is_info">#808080</color>
+    <color name="is_txt_bg">#353535</color>
+    <color name="is_post_bg">#242424</color>
 </resources>
