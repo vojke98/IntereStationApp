@@ -24,7 +24,6 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity {
 
     final String baseUrl = "https://interestation.azurewebsites.net/api/v1/";
-    //final String ApiKey = "isStrong(!)apiKey";
     final int USERS = 0;
     final int LIKES = 1;
     final int POSTS = 2;
