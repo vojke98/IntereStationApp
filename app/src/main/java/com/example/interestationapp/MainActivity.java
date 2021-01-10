@@ -3,17 +3,20 @@ package com.example.interestationapp;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import com.android.volley.RequestQueue;
+import com.android.volley.Request.Priority;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import org.json.JSONObject;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-
 import android.widget.ListView;
 import android.widget.Toast;
 import com.android.volley.Request;
 import java.util.Date;
+import java.util.Deque;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
     List<Post> pList;
     List<User> uList;
     List<Like> lList;
-    PostAdapter adapter;
+    PostAdapter postAdapter;
     RequestQueue requestQueue;
 
     @Override
@@ -38,11 +41,11 @@ public class MainActivity extends AppCompatActivity {
         requestQueue = Volley.newRequestQueue(this);//This will take care of background newtwork activities
 
         getUsers();
-        getPosts();
         getLikes();
+        getPosts();
 
-        adapter = new PostAdapter(this, R.layout.customcell, pList);
-        post_listView.setAdapter(adapter);
+        postAdapter = new PostAdapter(this, R.layout.customcell, pList, requestQueue);
+        post_listView.setAdapter(postAdapter);
     }
 
     private void getUsers() {
@@ -53,20 +56,20 @@ public class MainActivity extends AppCompatActivity {
 
                     String id = jsonObject.getString("id");
                     String firstName = jsonObject.getString("firstName");
-                    String lastName  = jsonObject.getString("lastName");
-                    String username  = jsonObject.getString("userName");
-                    String image  = jsonObject.getString("profilePic");
+                    String lastName = jsonObject.getString("lastName");
+                    String username = jsonObject.getString("userName");
+                    String image = jsonObject.getString("profilePic");
 
                     uList.add(new User(id, firstName, lastName, username, image));
 
-                    for(Post p : pList){
-                        if(id.equals(p.ownerId)){
+                    for (Post p : pList) {
+                        if (id.equals(p.ownerId)) {
                             p.ownerNick = username;
                             p.ownerImg = image;
                         }
                     }
                 }
-                adapter.notifyDataSetChanged();//To prevent app from crashing when updating
+                postAdapter.notifyDataSetChanged();//To prevent app from crashing when updating
                 //UI through background Thread
             } catch (Exception w) {
                 Toast.makeText(MainActivity.this, w.getMessage(), Toast.LENGTH_LONG).show();
@@ -81,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
                 for (int i = 0; i < response.length(); i++) {
                     JSONObject jsonObject = response.getJSONObject(i);
 
-                    String id = jsonObject.getString("postId");
+                    int id = jsonObject.getInt("postId");
                     String ownerId = jsonObject.getString("ownerId");
                     String dateString = jsonObject.getString("dateCreated");
                     String text = jsonObject.getString("text");
@@ -97,12 +100,19 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
 
-                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS" );
+                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS");
                     Date date = simpleDateFormat.parse(dateString);
 
-                    pList.add(new Post(id, ownerId, ownerNick, ownerImg, text, date, image));
+                    Post p = new Post(id, ownerId, ownerNick, ownerImg, text, date, image);
+                    pList.add(0, p);
+
+                    for (Like l: lList){
+                        if(l.postId == id){
+                            p.likes.add(l);
+                        }
+                    }
                 }
-                adapter.notifyDataSetChanged();//To prevent app from crashing when updating
+                postAdapter.notifyDataSetChanged();//To prevent app from crashing when updating
                 //UI through background Thread
 
             } catch (Exception w) {
@@ -120,18 +130,18 @@ public class MainActivity extends AppCompatActivity {
 
                     String id = jsonObject.getString("likeId");
                     String userId = jsonObject.getString("userId");
-                    String postId  = jsonObject.getString("postId");
+                    int postId = jsonObject.getInt("postId");
 
                     Like l = new Like(id, userId, postId);
                     lList.add(l);
 
-                    for(Post p : pList){
-                        if(postId.equals(p.id)){
+                    for(Post p: pList){
+                        if(p.id == postId){
                             p.likes.add(l);
                         }
                     }
                 }
-                adapter.notifyDataSetChanged();//To prevent app from crashing when updating
+                postAdapter.notifyDataSetChanged();//To prevent app from crashing when updating
                 //UI through background Thread
             } catch (Exception w) {
                 Toast.makeText(MainActivity.this, w.getMessage(), Toast.LENGTH_LONG).show();

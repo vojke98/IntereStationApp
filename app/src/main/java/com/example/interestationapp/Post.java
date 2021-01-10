@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Post {
 
-    public String id;
+    public int id;
     public String ownerId;
     public String text;
     public Date date;
@@ -15,7 +15,7 @@ public class Post {
     public String ownerImg;
     public List<Like> likes;
 
-    Post(String id, String ownerId, String ownerNick, String ownerImg, String text, Date date, String image)
+    Post(int id, String ownerId, String ownerNick, String ownerImg, String text, Date date, String image)
     {
         this.id = id;
         this.ownerId = ownerId;
