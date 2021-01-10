@@ -13,4 +13,6 @@
     <color name="is_info">#808080</color>
     <color name="is_txt_bg">#353535</color>
     <color name="is_post_bg">#242424</color>
+    <color name="is_header">#0d0d0d</color>
+    <color name="shadow">#121212</color>
 </resources>

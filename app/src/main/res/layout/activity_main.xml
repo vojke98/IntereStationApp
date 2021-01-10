@@ -7,12 +7,32 @@
 
     tools:context=".MainActivity">
 
+    <LinearLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:orientation="horizontal"
+        android:background="@android:drawable/dark_header"
+        android:elevation="15dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="IntereStation"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:textColor="@color/is_link"/>
+
+    </LinearLayout>
+
     <ListView
         android:id="@+id/post_list_view"
         android:divider="@null"
-        android:dividerHeight="100dp"
+        android:dividerHeight="80dp"
         android:background="@color/is_bg"
         android:layout_width="match_parent"
+        android:layout_below="@id/header"
         android:layout_height="match_parent" />
 
 </RelativeLayout>
