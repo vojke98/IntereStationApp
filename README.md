@@ -27,3 +27,7 @@ Slika 5 Začetna stran (Android Client) - Like
 Podatkovni model:
 <br><br>
 ![](images/DbDiagram.png) <br>
+
+
+Mobilna aplikacija se navezuje na web API spletne aplikacije ki smo ga izdelali za Interests, Posts, Likes in Users, ki je tudi dokumentiran v Swaggerju. Kot GET zahtevek smo naredili da aplikacija prikazuje vse objave na glavni strani web aplikacije, skupaj z imenom lastnika objave, številom like-ov ter datumom objave. Objava je lahko tekstovna ali slikovna. POST zahtevek je pa dodajanje like-ov na posamezno objavo.
+
