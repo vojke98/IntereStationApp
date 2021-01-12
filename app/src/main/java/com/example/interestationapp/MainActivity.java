@@ -1,7 +1,6 @@
 package com.example.interestationapp;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import com.android.volley.RequestQueue;
@@ -23,7 +22,7 @@ import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
-    final String baseUrl = "https://interestation.azurewebsites.net/api/v1/";
+    final String baseUrl = "https://web-interestation.azurewebsites.net/api/v1/";
     final int USERS = 0;
     final int LIKES = 1;
     final int POSTS = 2;

@@ -31,7 +31,7 @@ import java.util.Map;
 import java.util.UUID;
 
 public class PostAdapter extends ArrayAdapter<Post> {
-    final static String baseUrl = "https://interestation.azurewebsites.net/userFiles/";
+    final static String baseUrl = "https://web-interestation.azurewebsites.net/userFiles/";
     Context context;
     int resource;
     List<Post> postList;
@@ -80,7 +80,7 @@ public class PostAdapter extends ArrayAdapter<Post> {
 
                 final String mRequestBody = jsonObject.toString();
 
-                String url = "https://interestation.azurewebsites.net/api/v1/Likes";
+                String url = "https://web-interestation.azurewebsites.net/api/v1/Likes";
                 StringRequest stringRequest = new StringRequest(Request.Method.POST, url, response -> Log.i("LOG_VOLLEY", response), error -> Log.e("LOG_VOLLEY", error.toString())
                 ){
                     @Override
@@ -131,7 +131,10 @@ public class PostAdapter extends ArrayAdapter<Post> {
         }else {
             String url = baseUrl + post.ownerId + "/" + post.id + "/" + post.image;
             Picasso.get().load(url).into(image);
-            url = baseUrl + post.ownerId + "/" + post.ownerImg;
+        }
+
+        if(!post.ownerImg.equals("null")) {
+            String url = baseUrl + post.ownerId + "/" + post.ownerImg;
             Picasso.get().load(url).into(ownerImage);
         }
 
